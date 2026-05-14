@@ -13,7 +13,7 @@ export function useWebSocket(onMessage: (msg: WSMessage) => void) {
   const ws = useRef<WebSocket | null>(null);
 
   const connect = useCallback(() => {
-    const url = process.env.NEXT_PUBLIC_WS_URL ?? 'ws://localhost:4000';
+    const url = process.env.NEXT_PUBLIC_WS_URL ?? (process.env.NODE_ENV === 'production' ? 'wss://localhost:4000' : 'ws://localhost:4000');
     ws.current = new WebSocket(url);
 
     ws.current.onmessage = (e) => {
