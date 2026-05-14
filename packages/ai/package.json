@@ -1,0 +1,19 @@
+{
+  "name": "@sentinelops/ai",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "tsc --build --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "openai": "^4.47.0",
+    "@sentinelops/graph": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

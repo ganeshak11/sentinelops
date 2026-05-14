@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "composite": true
+  },
+  "references": [
+    { "path": "../../packages/graph" },
+    { "path": "../../packages/ai" },
+    { "path": "../../packages/correlator" }
+  ],
+  "include": ["src"]
+}
