@@ -4,6 +4,84 @@ Each section is a self-contained guide for one role. Read only your section. Sta
 
 ---
 
+## ⚠️ Strict Dependency Rules — Read Before You Write a Single Line
+
+This is not optional. If you build something that depends on work that isn't done yet, you will waste your time and break everyone else's.
+
+### The Build Order
+
+```
+Phase 1 — Foundation (Member 1)
+  └── AuraDB live + db:migrate + db:seed
+  └── All hydrators implemented and tested
+  └── All graph queries implemented and tested
+        │
+        ▼
+Phase 2 — Core Services (Members 2, 3, 4 in parallel — after Phase 1)
+  ├── Member 2: LLM provider + generateNarrative working
+  ├── Member 3: Auth (GitHub + GitLab OAuth) + JWT middleware
+  └── Member 4: WebSocket server + webhook parsers
+        │
+        ▼
+Phase 3 — API Layer (Members 3, 4 — after Phase 2)
+  ├── Member 3: Events ingestion + RCA engine wired end-to-end
+  └── Member 4: Incidents API + Graph API + Actions API
+        │
+        ▼
+Phase 4 — Frontend (Members 5, 6 — after Phase 3)
+  ├── Member 5: Auth pages + Incident feed + Incident detail
+  └── Member 6: Cytoscape.js graph + Blast radius + Postmortem
+        │
+        ▼
+Phase 5 — Security hardening (Members 7, 8 — runs alongside Phase 3 and 4)
+  ├── Member 7: Security middleware + webhook verification
+  └── Member 8: JWT review + Cypher injection audit + dependency audit
+```
+
+### Hard Rules
+
+1. **Frontend does not start a page until the API endpoint for that page exists and is tested.**
+   - No building a UI for something the backend hasn't shipped yet
+   - Check `PROGRESS.md` — if the backend step isn't checked off, wait or coordinate
+
+2. **Backend does not call a graph function until Member 1 has checked it off in `PROGRESS.md`.**
+   - The stubs throw `Error('Not implemented')` — your code will crash if you call them early
+   - If you need a function urgently, talk to Member 1 first
+
+3. **Member 2 cannot be called by the RCA engine until `generateNarrative` is checked off.**
+   - Members 3/4 should mock the narrative with a hardcoded string while waiting
+   - Swap the mock for the real call once Member 2 checks it off
+
+4. **Members 7/8 review auth and webhooks BEFORE those features are merged to `dev`.**
+   - Members 3/4 open a PR → tag Members 7/8 for review → merge only after approval
+   - Security review is not an afterthought — it blocks the merge
+
+5. **No direct commits to `dev` or `main`.** Always a feature branch + PR.
+   - Branch naming: `feat/<name>`, `fix/<name>`, `chore/<name>`
+   - PR must pass CI before merge
+
+6. **Update `PROGRESS.md` every time you complete a task.** This is how the team knows what's unblocked.
+   - If you finish something and don't update `PROGRESS.md`, the next person will sit idle waiting
+
+7. **Do not change `packages/graph/src/types.ts` without telling the whole team.**
+   - This file is the contract everyone builds against
+   - A change here breaks backend, frontend, and AI package simultaneously
+   - If you need a type change, raise it — Member 1 makes the call
+
+### Who is blocked by whom
+
+| This person... | ...is blocked until... |
+|---|---|
+| Members 3/4 (event ingestion) | Member 1 finishes hydrators |
+| Members 3/4 (RCA engine) | Member 1 finishes RCA queries + Member 2 finishes `generateNarrative` |
+| Members 3/4 (incidents API) | RCA engine is working |
+| Members 5/6 (any page) | The API endpoint for that page is done and tested |
+| Members 7/8 (auth review) | Members 3/4 finish auth implementation |
+| Members 7/8 (webhook review) | Members 3/4 finish webhook implementation |
+| Everyone | Member 1 finishes AuraDB setup + seed |
+
+---
+
 ## Member 1 — Infra, Architecture, Neo4j
 
 ### Your files
