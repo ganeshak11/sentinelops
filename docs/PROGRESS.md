@@ -18,7 +18,7 @@
 
 | Member | Role | Status |
 |---|---|---|
-| Member 1 | Infra + Neo4j | 🟡 In Progress |
+| Member 1 | Infra + Neo4j | 🟢 Done |
 | Member 2 | AI / ML | 🔴 Not Started |
 | Member 3 | Backend | 🔴 Not Started |
 | Member 4 | Backend | 🔴 Not Started |
@@ -41,27 +41,27 @@
 - [x] `packages/graph/src/client.ts` — Neo4j driver written
 - [x] `scripts/db-migrate.ts` — migration script written
 - [x] `scripts/db-seed.ts` — seed script written
-- [ ] AuraDB instance provisioned
-- [ ] `.env` filled with real AuraDB credentials
-- [ ] `npm run db:migrate` ran successfully
-- [ ] `npm run db:seed` ran successfully — 8 services + sample incident visible in AuraDB browser
+- [x] AuraDB instance provisioned
+- [x] `.env` filled with real AuraDB credentials
+- [x] `npm run db:migrate` ran successfully
+- [x] `npm run db:seed` ran successfully — 8 services + sample incident visible in AuraDB browser
 
 ### Graph Hydrators (`packages/graph/src/hydrators/index.ts`)
-- [ ] `hydrateTopology` — MERGE Service nodes + DEPENDS_ON edges
-- [ ] `hydrateDeploy` — CREATE Deploy node + DEPLOYED_TO edge
-- [ ] `hydrateAlert` — CREATE Alert node + AFFECTS edge
-- [ ] `hydrateMetric` — CREATE MetricEvent node + AFFECTS edge
+- [x] `hydrateTopology` — MERGE Service nodes + DEPENDS_ON edges
+- [x] `hydrateDeploy` — CREATE Deploy node + DEPLOYED_TO edge
+- [x] `hydrateAlert` — CREATE Alert node + AFFECTS edge
+- [x] `hydrateMetric` — CREATE MetricEvent node + AFFECTS edge
 
 ### RCA Queries (`packages/graph/src/queries/rca.ts`)
-- [ ] `computeBlastRadius` — returns `BlastRadiusEntry[]`
-- [ ] `findProbableCauses` — returns `ProbableCause[]`
-- [ ] `getIncidentTimeline` — returns `TimelineEvent[]`
-- [ ] `findSimilarIncidents` — returns past incident IDs
+- [x] `computeBlastRadius` — returns `BlastRadiusEntry[]`
+- [x] `findProbableCauses` — returns `ProbableCause[]`
+- [x] `getIncidentTimeline` — returns `TimelineEvent[]`
+- [x] `findSimilarIncidents` — returns past incident IDs
 
 ### Topology Queries (`packages/graph/src/queries/topology.ts`)
-- [ ] `getTopologyGraph` — shaped for Cytoscape.js
-- [ ] `getServiceHealthSnapshot`
-- [ ] `getServiceDetail`
+- [x] `getTopologyGraph` — shaped for Cytoscape.js
+- [x] `getServiceHealthSnapshot`
+- [x] `getServiceDetail`
 
 ### Infrastructure
 - [x] `docker-compose.yml` at root
