@@ -19,7 +19,7 @@
 | Member | Role | Status |
 |---|---|---|
 | Member 1 | Infra + Neo4j | 🟢 Done |
-| Member 2 | AI / ML | 🔴 Not Started |
+| Member 2 | AI / ML | 🟢 Done |
 | Member 3 | Backend | 🔴 Not Started |
 | Member 4 | Backend | 🔴 Not Started |
 | Member 5 | Frontend | 🔴 Not Started |
@@ -79,28 +79,28 @@
 ## Member 2 — AI / ML
 
 ### LLM Provider Setup (`packages/ai/src/providers/`)
-- [ ] `packages/ai/src/providers/openai.ts` — OpenAI client wrapper
-- [ ] `packages/ai/src/providers/index.ts` — `llm(prompt)` function, reads `LLM_MODEL` from env
-- [ ] Provider tested with a raw prompt
+- [x] `packages/ai/src/providers/openai.ts` — OpenAI client wrapper
+- [x] `packages/ai/src/providers/index.ts` — `llm(prompt)` function, reads `LLM_MODEL` from env
+- [x] Provider tested with a raw prompt
 
 ### Narrative Generation (`packages/ai/src/index.ts`)
-- [ ] `generateNarrative(chain)` implemented
-- [ ] Tested against seeded `CausalChain` from `db-seed.ts`
-- [ ] Output is consistently grounded — no hallucination beyond provided data
-- [ ] Prompt tuned in `packages/ai/src/prompts/index.ts`
+- [x] `generateNarrative(chain)` implemented
+- [x] Tested against seeded `CausalChain` from `db-seed.ts`
+- [x] Output is consistently grounded — no hallucination beyond provided data
+- [x] Prompt tuned in `packages/ai/src/prompts/index.ts`
 
 ### Postmortem Generation
-- [ ] `buildPostmortemPrompt` implemented in `prompts/index.ts`
-- [ ] `generatePostmortem(chain, resolution)` implemented in `index.ts`
-- [ ] Output is valid Markdown
+- [x] `buildPostmortemPrompt` implemented in `prompts/index.ts`
+- [x] `generatePostmortem(chain, resolution)` implemented in `index.ts`
+- [x] Output is valid Markdown
 
 ### Anomaly Detection
-- [ ] `detectAnomalies(service, metricName, values)` implemented
-- [ ] Z-score threshold tested — 420% deviation correctly flagged as anomaly
+- [x] `detectAnomalies(service, metricName, values)` implemented
+- [x] Z-score threshold tested — 420% deviation correctly flagged as anomaly
 
 ### Log Clustering
-- [ ] `clusterLogs(logs)` implemented
-- [ ] Groups log patterns correctly by service + time window
+- [x] `clusterLogs(logs)` implemented
+- [x] Groups log patterns correctly by service + time window
 
 ---
 
